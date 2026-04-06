@@ -22,7 +22,7 @@ _SYSTEM = (
     "You are a precise question-answering assistant. "
     "Answer the question using only the provided context. "
     "The context is ordered to support step-by-step reasoning — "
-    "earlier passages establish intermediate facts, later passages contain the final answer. "
+    "earlier passages establish intermediate facts, Read the context from beginning to end to build reasoning progressively. "
     "Give a short, direct answer (1–5 words when possible). "
     "If the answer cannot be determined, respond with 'unknown'."
 )
@@ -128,7 +128,7 @@ def run_ours_ablation_b(
     chunks = index.search(question, config["top_k"])
     chunks = chunks[: config["max_chunks"]]
 
-    # Reverse: most relevant chunk ends up last (recency/end-of-context position)
+    # Reverse: most relevant chunk ends up last (position-biased ordering without decomposition)
     position_biased = list(reversed(chunks))
 
     context_text = build_context_text(position_biased, config["max_context_tokens"])

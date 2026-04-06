@@ -23,21 +23,24 @@ _DEFAULT_CACHE = _PROJECT_ROOT / "data" / "decomp_cache.json"
 
 _BRIDGE_SYSTEM = (
     "Decompose the multi-hop question into ordered sub-questions where each answer "
-    "feeds into the next. Return a JSON array of strings only. No explanation."
+    "feeds into the next. "
+    "Each sub-question must be self-contained — replace pronouns like 'that', 'this', "
+    "'the same' with the actual entity name from the previous answer. "  # ← 추가
+    "Return a JSON array of strings only. No explanation."
 )
 
 _BRIDGE_EXAMPLES = [
     (
         "Who is the father of the director of Interstellar?",
-        '["Who directed Interstellar?", "Who is the father of that director?"]',
+        '["Who directed Interstellar?", "Who is the father of Christopher Nolan?"]',
     ),
     (
         "What is the nationality of the director of the film that won Best Picture in 2020?",
-        '["Which film won Best Picture in 2020?", "Who directed that film?", "What is the nationality of that director?"]',
+        '["Which film won Best Picture in 2020?", "Who directed Parasite?", "What is the nationality of Bong Joon-ho?"]',
     ),
     (
-        "What year was the birthplace of the author of Hamlet founded?",
-        '["Who wrote Hamlet?", "Where was that author born?", "What year was that city founded?"]',
+        "In what year was the university where Sergei Tokarev was a professor founded?",
+        '["Which university was Sergei Tokarev a professor at?", "In what year was Moscow State University founded?"]',
     ),
 ]
 
