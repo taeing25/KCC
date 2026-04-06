@@ -209,7 +209,7 @@ def main():
     client = OpenAI(api_key=api_key)
     cache = EmbeddingCache(_ROOT / "data" / "embed_cache.pkl")
     indexer = FaissIndexer(client, config["embedding_model"], cache)
-    decomposer = QueryDecomposer()
+    decomposer = QueryDecomposer(client, config["model_name"])
 
     logger.info(
         "Loading %d samples (data_seed=%d)…",
