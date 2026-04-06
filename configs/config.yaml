@@ -1,0 +1,23 @@
+# Multi-hop QA experiment configuration
+
+# Data sampling
+sample_size: 500
+data_seed: 42     # seed for sampling 500 validation examples
+run_seed: 42      # seed for ablation A (chunk shuffle)
+
+# Chunking
+chunk_size: 200   # tokens per chunk
+chunk_overlap: 20 # token overlap between chunks
+
+# Retrieval
+top_k: 5          # retrieved chunks per sub-question
+max_chunks: 15    # max total chunks passed to LLM
+
+# Models
+model_name: "gpt-4o-mini"
+embedding_model: "text-embedding-3-small"
+
+# Fairness constraints (applied equally to all methods)
+max_context_tokens: 3000
+max_llm_calls: 4
+max_retrieval_rounds: 3
